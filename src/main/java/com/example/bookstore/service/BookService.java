@@ -58,6 +58,10 @@ public class BookService {
         return bookRepository.findAll();
     }
 
+    @Transactional
+    public Books findBooksById(int id){
+        return  bookRepository.getById(id);
+    }
 
 
 }

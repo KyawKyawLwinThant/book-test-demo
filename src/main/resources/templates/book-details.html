@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/userLayout :: layout(~{::main})}" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<main role="main">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-4">
+        <h5 th:text="${book.title}"></h5>
+        <p th:text="${book.category}"></p>
+        <p th:text="${'In published ' + book.publishedYear}"></p>
+        <p th:text="${book.category}"></p>
+        <p th:text="${'Cost ' + book.price + ' $'}"></p>
+      </div>
+      <div class="col-8">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto eligendi eos, error expedita, hic incidunt, ipsam nostrum pariatur sed sit suscipit velit. Ab at fuga in quas sapiente totam ullam?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus error fugit incidunt iste laborum nemo quae quaerat, quidem quisquam rerum temporibus voluptatem voluptates. Blanditiis fuga fugit iste, officiis quia saepe.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci assumenda, debitis deleniti dolorem in laborum libero omnis pariatur placeat possimus quidem, sapiente tempore, totam. At dicta laudantium mollitia similique veritatis?
+      </div>
+    </div>
+    <div class="my-3">
+      <a class="btn btn-outline-primary mr-3">Add To Cart</a>
+      <a class="btn btn-outline-secondary mr-3">View Cart</a>
+      <a th:href="@{/books}" class="btn btn-outline-info">Continue Shopping</a>
+    </div>
+  </div>
+</main>
+</body>
+</html>
