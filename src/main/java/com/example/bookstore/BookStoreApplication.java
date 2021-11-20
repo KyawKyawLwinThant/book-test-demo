@@ -18,10 +18,4 @@ public class BookStoreApplication {
     }
 
 
-    @Bean
-    public ApplicationRunner runner(){
-        return args -> {
-          throw new RuntimeException();
-        };
-    }
 }
