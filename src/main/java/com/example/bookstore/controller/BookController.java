@@ -68,6 +68,25 @@ public class BookController {
     public Integer cartSize(){
         return cartBean.getBooks().size();
     }
+    @ModelAttribute("totalPrice")
+    public Double totalPrice(){
+        return cartBean.getBooks()
+                .stream()
+                .mapToDouble(b -> b.getPrice())
+                .sum();
+    }
+
+    @GetMapping("/books/clear-cart")
+    public String clearCart(){
+        cartBean.clear();
+        return "redirect:/books/cart-view";
+    }
+
+    @GetMapping("/books/delete-cart/{id}")
+    public String removeBookFromCart(@PathVariable int id){
+        cartBean.removeBook(bookService.findBooksById(id));
+        return "redirect:/books/cart-view";
+    }
 
 
 

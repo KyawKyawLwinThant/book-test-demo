@@ -5,7 +5,7 @@
 <main role="main">
 
     <div class="container my-4">
-        <table class="table table-striped">
+        <table class="table table-striped" th:if="${!cart.isEmpty()}">
             <thead>
             <th scope="col">Id</th>
             <th scope="col">Category</th>
@@ -13,6 +13,7 @@
             <th scope="col">Description</th>
             <th scope="col">Author Name</th>
             <th scope="col">Price</th>
+            <th scope="col">Action</th>
             </thead>
             <tbody>
                 <tr th:each="book :${cart}">
@@ -22,10 +23,27 @@
                     <td th:text="${book.description}"></td>
                     <td th:text="${book.author.name}"></td>
                     <td th:text="${#numbers.formatDecimal(book.price,2,2,'POINT')}"></td>
+                    <td><a th:href="@{'/books/delete-cart/'+ ${book.id}}">Delete</a> </td>
                 </tr>
             </tbody>
         </table>
+        <div class="row mt-3 py-5">
+            <div class="col-8"></div>
+            <div class="col-4">
+                <span style="font-size: 32px;font-weight: bolder">Total:</span><span th:text="${#numbers.formatDecimal(totalPrice,2,2,'POINT')}"></span>
+            </div>
+        </div>
+
+
+        <div class="my-3">
+            <a class="btn btn-outline-primary mr-3">Check Out</a>
+            <a class="btn btn-outline-secondary mr-3" th:href="@{/books/clear-cart}">Clear Cart</a>
+            <a th:href="@{/books}" class="btn btn-outline-info">Continue Shopping</a>
+        </div>
     </div>
+
+
+
 
 </main>
 </body>

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Component
@@ -36,6 +37,17 @@ public class CartBean {
         }
         return isExist;
     }
+
+    public void removeBook(Books book){
+        Iterator<Books> bookIterator=books.iterator();
+        while(bookIterator.hasNext()){
+            if(bookIterator.next().getId() == book.getId()){
+                bookIterator.remove();
+                break;
+            }
+        }
+    }
+
 
     public void clear(){
         books.clear();
