@@ -20,8 +20,21 @@ public class CartBean {
     }
 
     public Books addToBook(Books book){
-        books.add(book);
+        if(!isOldBooks(book)){
+            books.add(book);
+        }
         return book;
+    }
+
+    private boolean isOldBooks(Books book) {
+        boolean isExist=false;
+        for(Books book1:books){
+            if(book1.getId() == book.getId()){
+                isExist=true;
+                break;
+            }
+        }
+        return isExist;
     }
 
     public void clear(){

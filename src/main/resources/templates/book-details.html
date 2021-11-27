@@ -19,8 +19,8 @@
       </div>
     </div>
     <div class="my-3">
-      <a class="btn btn-outline-primary mr-3">Add To Cart</a>
-      <a class="btn btn-outline-secondary mr-3">View Cart</a>
+      <a class="btn btn-outline-primary mr-3" th:href="@{'/books/add-to-cart/'+ ${book.id}}">Add To Cart</a>
+      <a class="btn btn-outline-secondary mr-3" th:href="@{/books/cart-view}">View Cart</a>
       <a th:href="@{/books}" class="btn btn-outline-info">Continue Shopping</a>
     </div>
   </div>

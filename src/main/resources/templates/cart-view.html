@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/userLayout :: layout(~{::main})}" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<main role="main">
+
+    <div class="container my-4">
+        <table class="table table-striped">
+            <thead>
+            <th scope="col">Id</th>
+            <th scope="col">Category</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Author Name</th>
+            <th scope="col">Price</th>
+            </thead>
+            <tbody>
+                <tr th:each="book :${cart}">
+                    <td th:text="${book.id}"></td>
+                    <td th:text="${book.category}"></td>
+                    <td th:text="${book.title}"></td>
+                    <td th:text="${book.description}"></td>
+                    <td th:text="${book.author.name}"></td>
+                    <td th:text="${#numbers.formatDecimal(book.price,2,2,'POINT')}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</main>
+</body>
+</html>
