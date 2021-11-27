@@ -27,7 +27,7 @@ public class Books {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate publishedYear;
     @DecimalMin(value = "10.0",message = "Price too low!")
-    @DecimalMax(value= "100.0",message = "Price too high!")
+    @DecimalMax(value= "1000.0",message = "Price too high!")
     private Double price;
 
     public Books(){
