@@ -4,6 +4,11 @@
 <body>
 <main>
     <div class="container my-5">
+        <div th:if="${checkout}">
+            <div class="alert alert-success" role="alert">
+                <span>You have registered and checkout!</span>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-4" th:each="book : ${books}">
                 <div class="card mb-4" style="width: 18rem">

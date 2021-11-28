@@ -6,10 +6,7 @@ import org.h2.engine.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.model.IModel;
 
 import javax.websocket.server.PathParam;
@@ -34,7 +31,13 @@ public class BookController {
     }
     @GetMapping("/books")
     public String showAllBooks(Model model){
+        boolean successCheckout= model.containsAttribute("success");
+        if(successCheckout){
+            cartBean.clear();
+        }
+        model.addAttribute("checkout",successCheckout);
         model.addAttribute("books",bookService.findAllBooks());
+
         return "show-books";
     }
     //http://localhost:8080/books/7

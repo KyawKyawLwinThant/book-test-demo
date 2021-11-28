@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/userLayout :: layout(~{::main})}" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<main role="main">
+    <div class="container">
+    <h1>Test</h1>
+
+    <form>
+
+        <select class="custom-select my-5">
+            <option th:each="myop : ${myList}" th:text="${myop}" th:value="${myop}"></option>
+        </select>
+    </form>
+    </div>
+
+</main>
+
+</body>
+</html>
