@@ -30,6 +30,9 @@ public class Books {
     @DecimalMax(value= "1000.0",message = "Price too high!")
     private Double price;
 
+
+
+
     public Books(){
 
     }

@@ -5,6 +5,7 @@
 
 
 <main role="main">
+
     <div class="container my-5 p-5">
     <form method="post" th:action="@{/user/checkout}" th:object="${registerUser}">
 
@@ -37,25 +38,68 @@
         </div>
 
         <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" name="myradio" id="inlineradio1" value="1" th:field="*{option}">
+            <input type="radio" th:onchange="'getRadioValue(this)'" class="form-check-input" name="myradio" id="inlineradio1" value="1" th:field="*{option}">
             <label for="inlineradio1" class="form-check-label">One</label>
         </div>
 
         <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" name="myradio" id="inlineradio2" value="2" th:field="*{option}">
+            <input type="radio" th:onchange="'getRadioValue(this)'" class="form-check-input" name="myradio" id="inlineradio2" value="2" th:field="*{option}">
             <label for="inlineradio2" class="form-check-label">Two</label>
         </div>
 
         <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" name="myradio" id="inlineradio3" value="3" th:field="*{option}">
+            <input type="radio" th:onchange="'getRadioValue(this)'" class="form-check-input" name="myradio" id="inlineradio3" value="3" th:field="*{option}">
             <label for="inlineradio3" class="form-check-label">Three</label>
         </div>
+
+        <!--Dynamic Radio Check -->
+
+
+        <select class="custom-select my-5">
+            <option th:each="myop : ${myList}" th:text="${myop}" th:value="${myop}"></option>
+        </select>
+
 
         <input type="submit" value="Submit" class="btn btn-primary">
 
     </form>
 
     </div>
+
+
+    <script>
+
+        function  getRadioValue(val){
+           let radVal = val.value;
+            $.ajax(
+                {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    type:'POST',
+                    url:'http://localhost:8080/book/ajax',
+                    data:JSON.stringify(radVal),
+                    error:function (e){
+                        console.log(e);
+                    },
+                    dataType:'application/json',
+                    crossDomain: false,
+                    async:true,
+                    complete: function (response){
+                        console.log("Hello .....................")
+                        console.log(response);
+                        window.location.reload();
+                    }
+                }
+            );
+            return false;
+        }
+
+
+
+
+    </script>
 </main>
 
 

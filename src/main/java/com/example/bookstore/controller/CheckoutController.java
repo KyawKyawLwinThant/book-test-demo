@@ -4,16 +4,16 @@ package com.example.bookstore.controller;
 import com.example.bookstore.entities.UserRegister;
 import com.example.bookstore.service.CheckoutService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.http.HttpClient;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +23,8 @@ public class CheckoutController {
     private CheckoutService checkoutService;
 
     @GetMapping("/user/checkout")
-    public String checkoutForm(Model model){
+    public String checkoutForm(Model model,@ModelAttribute("myList") List<String> myList){
+        System.out.println("MyList :"+ myList);
         model.addAttribute("registerUser",new UserRegister());
         return "register-form";
     }
@@ -32,6 +33,7 @@ public class CheckoutController {
         if(result.hasErrors()){
             return "register-form";
         }
+
        // checkoutService.register(registerUser);
         redirectAttributes.addFlashAttribute("success",true);
         System.out.println("Option:"+ registerUser.getOption());
@@ -41,15 +43,7 @@ public class CheckoutController {
     }
         private int option;
 
-    @GetMapping("/book/mytest")
-    public String selectTest(Model model, @ModelAttribute("myMap") Map<Integer,List<String>> myMap){
 
-        List<String> myList=myMap.get(this.option);
-        System.out.println(myMap.get(this.option));
-        System.out.println(myList);
-        model.addAttribute("myList",myList);
-        return "test";
-    }
 
     @ModelAttribute("hobby")
     public List<String> hobbyList(){
@@ -60,11 +54,30 @@ public class CheckoutController {
         return List.of("Male","Female");
     }
 
+    @ResponseBody
+    @PostMapping(value = "/book/ajax",consumes = MediaType.APPLICATION_JSON_VALUE)
+    public String processRadioButton(@RequestBody  int value){
+        System.out.println("Value: "+ value);
+        this.radioValue=value;
+       // return "redirect:/user/checkout";
+        return "success";
+    }
 
 
-    @ModelAttribute("myMap")
-    public Map<Integer,List<String>> mappObject(){
-        return Map.of(1,List.of("a","b"),2,List.of("c","d"),3,List.of("e","f"));
+    private int radioValue;
+
+
+    @ModelAttribute("myList")
+    public List<String> listObject(){
+        switch (radioValue){
+            case 1: return List.of("a", "b");
+
+            case 2: return List.of("c","d");
+
+            case 3: return List.of("d","e");
+
+        }
+        return Collections.emptyList();
     }
 
 }
